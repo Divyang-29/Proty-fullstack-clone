@@ -1,0 +1,16 @@
+module.exports = [
+  "Bed linens",
+  "Carbon alarm",
+  "Check-in lockbox",
+  "Coffee maker",
+  "Dishwasher",
+  "Fireplace",
+  "Extra pillows",
+  "First aid kit",
+  "Hangers",
+  "Iron",
+  "Microwave",
+  "Refrigerator",
+  "Security cameras",
+  "Smoke alarm",
+];
