@@ -16,32 +16,57 @@ exports.searchProperties = async (req, res) => {
 
     let query = {};
 
-    if (type) query.type = type;
-    if (beds) query.beds = beds;
-    if (baths) query.baths = baths;
+    // 🔹 TYPE (sale / rent)
+    if (type) {
+      query.type = type;
+    }
 
+    // 🔹 BEDS & BATHS (convert to number)
+    if (beds) {
+      query.beds = Number(beds);
+    }
+
+    if (baths) {
+      query.baths = Number(baths);
+    }
+
+    // 🔹 PRICE RANGE
     if (minPrice || maxPrice) {
       query.price = {
-        $gte: minPrice || 0,
-        $lte: maxPrice || Infinity,
+        $gte: minPrice ? Number(minPrice) : 0,
+        $lte: maxPrice ? Number(maxPrice) : Number.MAX_SAFE_INTEGER,
       };
     }
 
+    // 🔹 SIZE RANGE
     if (minSize || maxSize) {
       query.size = {
-        $gte: minSize || 0,
-        $lte: maxSize || Infinity,
+        $gte: minSize ? Number(minSize) : 0,
+        $lte: maxSize ? Number(maxSize) : Number.MAX_SAFE_INTEGER,
       };
     }
 
+    // 🔹 AMENITIES (handle +, spaces, commas safely)
     if (amenities) {
-      query.amenities = { $all: amenities.split(",") };
+      const amenitiesArray = amenities
+        .split(",")
+        .map((item) => decodeURIComponent(item).replace(/\+/g, " ").trim());
+
+      query.amenities = { $all: amenitiesArray };
     }
 
+    // 🔹 DEBUG (optional – remove later)
+    console.log("Search Query:", query);
+
     const properties = await Property.find(query);
-    res.json(properties);
+    res.status(200).json(properties);
+    console.log("🔎 MongoDB Query Object:", JSON.stringify(query, null, 2));
   } catch (err) {
-    res.status(500).json({ error: "Search failed" });
+    console.error("❌ SEARCH ERROR:", err);
+    res.status(500).json({
+      error: "Search failed",
+      message: err.message,
+    });
   }
 };
 
@@ -62,11 +87,9 @@ exports.createProperty = async (req, res) => {
 // ✏️ UPDATE (ADMIN)
 exports.updateProperty = async (req, res) => {
   try {
-    const property = await Property.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true }
-    );
+    const property = await Property.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
 
     if (!property) {
       return res.status(404).json({ message: "Property not found" });

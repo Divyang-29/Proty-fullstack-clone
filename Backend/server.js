@@ -8,10 +8,17 @@ const passport = require("passport");
 const app = express();
 const PORT = 8080;
 
-app.use(cors());
+// 🔥 CORS FIX
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 
-// ✅ SESSION MUST COME BEFORE PASSPORT
+// 🔥 SESSION (BEFORE PASSPORT)
 app.use(
   session({
     secret: "local-auth-secret",
@@ -20,30 +27,24 @@ app.use(
   })
 );
 
-// ✅ PASSPORT SETUP
+// PASSPORT CONFIG
 require("./config/passport");
 
 app.use(passport.initialize());
 app.use(passport.session());
 
-// routes
+// ROUTES (YOU ALREADY HAVE THEM)
 app.use("/api/auth", require("./routes/auth.routes"));
 app.use("/api/contact", require("./routes/contact.routes"));
 app.use("/api/properties", require("./routes/property.routes"));
 app.use("/api/loan", require("./routes/loan.routes"));
 app.use("/api/amenities", require("./routes/amenities.routes"));
 
-// DB connection
-const connectDB = async () => {
-  try {
-    await mongoose.connect(process.env.MONGO_URL);
-    console.log("Connected with Database!");
-  } catch (err) {
-    console.error("Failed to connect with DB", err.message);
-  }
-};
-
-connectDB();
+// DB
+mongoose
+  .connect(process.env.MONGO_URL)
+  .then(() => console.log("Connected with Database!"))
+  .catch((err) => console.error(err.message));
 
 app.get("/", (req, res) => {
   res.send("Proty backend running");
