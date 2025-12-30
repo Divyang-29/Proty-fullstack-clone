@@ -1,0 +1,110 @@
+.loan-section {
+  padding: 80px 20px;
+}
+
+/* container */
+.loan-section .loan-container {
+  max-width: 1300px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+/* heading */
+.loan-section .loan-form h2 {
+  font-size: 34px;
+  margin-bottom: 10px;
+}
+
+/* ❗ FIXED: subtitle scoped */
+.loan-section .subtitle {
+  color: #777;
+  margin-bottom: 30px;
+  max-width: 480px;
+}
+
+/* grid */
+.loan-section .form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+/* ❗ FIXED: label scoped */
+.loan-section label {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 6px;
+  display: block;
+}
+
+/* ❗ FIXED: inputs scoped */
+.loan-section input,
+.loan-section select {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #eee;
+}
+
+/* estimate */
+.loan-section .estimate {
+  margin-top: 25px;
+  font-size: 15px;
+  color: #777;
+}
+
+.loan-section .estimate span {
+  color: #f7963b;
+  font-weight: 700;
+}
+
+/* ❗ FIXED: buttons scoped */
+.loan-section .buttons {
+  margin-top: 25px;
+  display: flex;
+  gap: 16px;
+}
+
+.loan-section .primary {
+  background: #f7963b;
+  color: #fff;
+  border: none;
+  padding: 12px 28px;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+.loan-section .secondary {
+  background: transparent;
+  border: 1px solid #f7963b;
+  color: #f7963b;
+  padding: 12px 28px;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+/* image */
+.loan-section .loan-image img {
+  width: 100%;
+  height: 620px;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+/* responsive */
+@media (max-width: 992px) {
+  .loan-section .loan-container {
+    grid-template-columns: 1fr;
+  }
+
+  .loan-section .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .loan-section .loan-image img {
+    height: 400px;
+  }
+}

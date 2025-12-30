@@ -1,0 +1,79 @@
+.property-section {
+  padding: 80px 20px;
+  text-align: center;
+  background: #fff;
+}
+
+.property-section h2 {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.property-section p {
+  color: #777;
+  font-size: 16px;
+  max-width: 600px;
+  margin: 0 auto 50px;
+}
+
+/* GRID */
+.property-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 24px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+/* CARD */
+.property-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 40px 20px;
+  border: 1px solid #eee;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.property-card i {
+  font-size: 42px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.property-card h4 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.property-card span {
+  font-size: 14px;
+  color: #777;
+}
+
+/* ACTIVE */
+.property-card.active {
+  background: #f7963b;
+  color: #fff;
+  box-shadow: 0 25px 40px rgba(247, 150, 59, 0.35);
+}
+
+.property-card.active i,
+.property-card.active span {
+  color: #fff;
+}
+
+/* HOVER */
+.property-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 35px rgba(0, 0, 0, 0.08);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .property-section h2 {
+    font-size: 28px;
+  }
+}

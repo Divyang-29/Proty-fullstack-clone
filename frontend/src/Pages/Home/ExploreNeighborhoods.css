@@ -1,0 +1,97 @@
+.neighborhoods {
+  padding: 80px 20px;
+  max-width: 1400px;
+  margin: auto;
+}
+
+.neighborhoods h2 {
+  text-align: center;
+  font-size: 36px;
+  margin-bottom: 8px;
+}
+
+.neighborhoods .subtitle {
+  text-align: center;
+  color: #777;
+  margin-bottom: 50px;
+}
+
+/* GRID */
+.neighborhood-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* CARD */
+.neighborhood-card {
+  position: relative;
+  height: 230px;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.neighborhood-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.neighborhood-card:hover img {
+  transform: scale(1.08);
+}
+
+/* OVERLAY */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.65),
+    rgba(0, 0, 0, 0.1)
+  );
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: 18px 20px;
+}
+
+.overlay h4 {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* PROPERTY PILL */
+.pill {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(6px);
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 30px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1200px) {
+  .neighborhood-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .neighborhood-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .neighborhood-grid {
+    grid-template-columns: 1fr;
+  }
+}

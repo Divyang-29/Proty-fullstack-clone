@@ -1,0 +1,65 @@
+.listing-page {
+  padding: 40px 60px;
+  font-family: Inter, sans-serif;
+}
+
+.breadcrumb {
+  font-size: 14px;
+  margin-bottom: 20px;
+  color: #777;
+}
+
+.breadcrumb .active {
+  color: #ff8c1a;
+}
+
+.listing-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.listing-header h1 {
+  font-size: 42px;
+  font-weight: 700;
+}
+
+.listing-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.filter-btn,
+.settings-btn {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #eee;
+  background: #fff;
+  cursor: pointer;
+}
+
+.view-icons button {
+  border: 1px solid #eee;
+  background: #fff;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.view-icons .active {
+  background: #ff8c1a;
+  color: #fff;
+}
+
+.sort-select {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #eee;
+}
+
+.property-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 30px !important;
+}
