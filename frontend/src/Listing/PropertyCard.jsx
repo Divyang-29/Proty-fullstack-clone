@@ -1,37 +1,64 @@
 import "./propertyCard.css";
 
-export default function PropertyCard() {
+export default function PropertyCard({ property, currentUser, onDelete }) {
+  const isOwner =
+    currentUser && property.createdBy === currentUser._id;
+
   return (
     <div className="property-card">
       <div className="image-wrap">
         <img
-          src={"https://themesflat.co/html/proty/images/section/box-house.jpg"}
-          alt="Property"
+          src={
+            property.images && property.images.length > 0
+              ? `http://localhost:8080${property.images[0]}`
+              : "https://themesflat.co/html/proty/images/section/box-house.jpg"
+          }
+          alt={property.title}
         />
 
         <div className="badges">
-          <span className="property-badge featured">Featured</span>
-          <span className="property-badge sale">For Sale</span>
+          {property.propertyLabel && (
+            <span className="property-badge featured">
+              {property.propertyLabel}
+            </span>
+          )}
+          {property.propertyStatus && (
+            <span className="property-badge sale">
+              {property.propertyStatus}
+            </span>
+          )}
         </div>
       </div>
 
       <div className="card-body">
-        <h3>Elegant studio flat</h3>
+        <h3>{property.title}</h3>
 
-        <p className="location">📍 102 Ingraham St, Brooklyn, NY 11237</p>
+        <p className="location">
+          📍 {property.address || "Location not provided"}
+        </p>
 
         <p className="info">
-          <strong>3</strong> Beds &nbsp;
-          <strong>3</strong> Baths &nbsp;
-          <strong>4,043</strong> Sqft
+          <strong>{property.bedrooms || 0}</strong> Beds &nbsp;
+          <strong>{property.bathrooms || 0}</strong> Baths &nbsp;
+          <strong>{property.size || 0}</strong> Sqft
         </p>
 
         <div className="card-footer">
-          <span className="price">$8.600</span>
+          <span className="price">₹{property.price}</span>
 
           <div className="actions">
             <button className="compare">⇄ Compare</button>
             <button className="details">Details</button>
+
+            {isOwner && (
+              <button
+                className="delete"
+                onClick={() => onDelete(property._id)}
+                style={{ color: "red", border: "none", background: "transparent" }}
+              >
+                Delete
+              </button>
+            )}
           </div>
         </div>
       </div>

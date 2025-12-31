@@ -1,9 +1,8 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import "./uploadMedia.css";
 
-export default function UploadMedia() {
+export default function UploadMedia({ images, setImages }) {
   const inputRef = useRef(null);
-  const [images, setImages] = useState([]);
 
   const handleFiles = (files) => {
     const selected = Array.from(files);
@@ -21,16 +20,8 @@ export default function UploadMedia() {
     setImages((prev) => [...prev, ...previews]);
   };
 
-  const handleInputChange = (e) => {
-    handleFiles(e.target.files);
-  };
-
-  const handleDrop = (e) => {
-    e.preventDefault();
-    handleFiles(e.dataTransfer.files);
-  };
-
   const removeImage = (index) => {
+    URL.revokeObjectURL(images[index].url); // 🔥 cleanup
     setImages((prev) => prev.filter((_, i) => i !== index));
   };
 
@@ -38,11 +29,13 @@ export default function UploadMedia() {
     <div className="upload-card">
       <h2>Upload Media</h2>
 
-      {/* DROP ZONE */}
       <div
         className="drop-zone"
         onDragOver={(e) => e.preventDefault()}
-        onDrop={handleDrop}
+        onDrop={(e) => {
+          e.preventDefault();
+          handleFiles(e.dataTransfer.files);
+        }}
       >
         <button
           type="button"
@@ -58,14 +51,13 @@ export default function UploadMedia() {
         <input
           ref={inputRef}
           type="file"
-          accept="image/*"
+          accept="image/*"       // 🔥 important
           multiple
           hidden
-          onChange={handleInputChange}
+          onChange={(e) => handleFiles(e.target.files)}
         />
       </div>
 
-      {/* PREVIEW */}
       {images.length > 0 && (
         <div className="preview-row">
           {images.map((img, index) => (
